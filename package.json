@@ -27,6 +27,7 @@
     "neo4j-driver": "^4.1.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
+    "sgnm-graphql-ogm": "^4.3.7",
     "sgnm-neo4j": "^0.1.375"
   },
   "devDependencies": {
