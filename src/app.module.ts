@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 // import { Neo4jModule } from './neo4j/neo4j.module';
 
 import { Neo4jModule } from 'sgnm-neo4j';
+import { UserModule } from './user/user.module';
 
 
 @Module({
@@ -36,6 +37,7 @@ import { Neo4jModule } from 'sgnm-neo4j';
         database: configService.get('NEO4J_DATABASE'),
       }),
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
