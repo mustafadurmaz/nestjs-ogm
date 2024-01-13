@@ -1,0 +1,2923 @@
+type CheckList {
+  id: Int
+  labels: [String]
+  canDelete: Boolean
+  canDisplay: Boolean
+  className: String
+  createdAt: DateTime
+  description: String
+  isActive: Boolean
+  versionNo: String
+  validityStatus: DateTime
+  isDeleted: Boolean
+  estimatedTime: String
+  timeType: String
+  key: String
+  CheckListValues: [CheckListValue!]!
+  checkListType: [CheckListType!]!
+  name: String!
+  tag: [String]!
+  scheduler: [Schedule!]!
+  updatedAt: DateTime
+  includesOfCheckItems: [CheckItem!]!
+  hasRegulations: [Regulation!]!
+}
+
+type CheckListType {
+  canDelete: Boolean
+  canDisplay: Boolean
+  code: String
+  createdAt: DateTime
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  language: String
+  name: String
+  owner: String
+  trId: String
+  updatedAt: DateTime
+  realm: String
+}
+
+type Regulation {
+  id: Int
+  labels: [String]
+  canDelete: Boolean
+  canDisplay: Boolean
+  checkListsHas: [CheckList!]!
+  CheckListValue: [CheckItemValue!]!
+  className: String
+  createdAt: DateTime
+  description: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type ChecklistValueScope {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  name: String!
+  MaintenanceTask: [Maintenance!]!
+  SupportTask: [Support!]!
+  ScopeItem: [ChecklistValueScope!]!
+}
+
+type Technician {
+  referenceId: String!
+  referenceLabel: [String]!
+  url: String!
+  urlType: String!
+  userOriginal: JSON
+}
+
+type Effort {
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  description: String
+  effortDuration: String
+  effortOfUsers: [UserVirtualWorkSpace!]!
+  effortType: String
+  endDate: DateTime
+  ScopeMaintenanceEffort: [CheckListValue!]!
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  owner: String
+  startDate: DateTime
+  trId: String
+  updatedAt: DateTime
+}
+
+type Component {
+  id: Int
+  referenceId: Int
+  canDelete: Boolean
+  createdAt: DateTime
+  isDeleted: Boolean
+  key: String
+  name: String
+  referenceLabel: [String]
+  updatedAt: DateTime
+  url: String
+  urlType: String
+}
+
+type System {
+  id: Int
+  referenceId: String
+  canDelete: Boolean
+  createdAt: DateTime
+  isDeleted: Boolean
+  key: String
+  name: String
+  referenceLabel: [String]
+  updatedAt: DateTime
+  url: String
+  urlType: String
+}
+
+type FacilityStructure {
+  id: Int
+  referenceId: String
+  canDelete: Boolean
+  createdAt: DateTime
+  isDeleted: Boolean
+  key: String
+  name: String
+  referenceLabel: [String]
+  updatedAt: DateTime
+  url: String
+  urlType: String
+}
+
+type CheckListValue {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  createdAt: DateTime
+  name: String!
+  key: String
+  Effort: [Effort!]!
+  CheckList: [CheckList!]!
+  MaintenanceTask: [Maintenance!]!
+  SupportTask: [Support!]!
+  ScopeItem: [ChecklistValueScope!]!
+  Status: [CheckListValueStatusNode!]!
+  Regulation: [Regulation!]!
+  Component: [Component!]!
+  System: [System!]!
+  FacilityStructure: [FacilityStructure!]!
+  Technician: [Technician!]!
+  CheckItemValue: [CheckItemValue!]!
+  Image: [Image!]!
+  Document: [Document!]!
+}
+
+type Image {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdAtDate: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String
+  trId: String!
+  updatedAt: DateTime!
+  updatedAtDate: String!
+  url: String!
+}
+
+type Document {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdAtDate: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String
+  trId: String!
+  updatedAt: DateTime!
+  updatedAtDate: String!
+  url: String!
+}
+
+type CheckListValueStatusMain {
+  id: Int
+  labels: [String]
+  language: String
+  name: String
+  code: String
+  Statuses: [CheckListValueStatusNode!]!
+}
+
+type CheckListValueStatusNode {
+  id: Int
+  labels: [String]
+  language: String
+  name: String
+  code: String
+  CheckListValue: [CheckListValue!]!
+}
+
+type WorkOrderRoot {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String!
+  parentOfClassifications: [Classification!]!
+  parentOfCronJobs: [CronJobMain!]!
+  parentOfDecisionModelNotations: [DecisionModelNotationMain!]!
+  parentOfFeatures: [FeatureMain!]!
+  parentOfProjectTypes: [ProjectTypeMain!]!
+  parentOfTaskTypes: [TaskTypeMain!]!
+  parentOfWorkFlows: [WorkFlowMain!]!
+  parentOfWorkSpaces: [WorkSpaceMain!]!
+  realm: String!
+  tag: [String]!
+  updatedAt: DateTime!
+}
+
+type Classification {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type CronJobMain {
+  id: Int
+  labels: [String]
+  canCopied: Boolean
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean
+  key: String
+  name: String!
+  owner: String
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type DecisionModelNotationMain {
+  id: Int
+  labels: [String]
+  canCopied: Boolean
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type MaintenanceMainNode {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  key: String!
+  realm: String!
+  name: String
+  rootsParentOf: [WorkOrderRoot!]!
+  MaintenanceMain: [MaintenanceMain!]!
+}
+
+type WorkFlowMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  parentOfWorkFlows: [WorkFlow!]!
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type WorkFlow {
+  id: Int
+  labels: [String]
+}
+
+type WorkSpaceMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  createdBy: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  parentOfWorkSpaces: [WorkSpace!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type TaskTypeMain {
+  id: Int
+  labels: [String]
+  name: String
+  canDelete: Boolean
+  realm: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  rootsParentOf: [WorkOrderRoot!]!
+  childs: [TaskTypeLang!]!
+}
+
+type FeatureMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type RegulationMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type CheckListMain {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  name: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  parentOfCheckList: [CheckList!]!
+  realm: String!
+}
+
+type CheckItemsMain {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  name: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  CheckItems: [CheckItem!]!
+  realm: String!
+}
+
+type SchedulesNodes {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+}
+
+type UserMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  parentOfUsers: [UserVirtualWorkSpace!]!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type LanguageMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+}
+
+type ProjectTypeMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  tag: [String]
+  updatedAt: DateTime
+  rootsParentOf: [WorkOrderRoot!]!
+  projectTypesEnsParentOf: [ProjectTypesEn!]!
+  projectTypesTrsParentOf: [ProjectTypesTr!]!
+}
+
+type ProjectTypesEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [ProjectTypeMain!]!
+  parentOfProjectTypes: [ProjectType!]!
+}
+
+type ProjectTypesTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [ProjectTypeMain!]!
+  parentOfProjectTypes: [ProjectType!]!
+}
+
+type ProjectType {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String
+  language: String!
+  name: String!
+  projectTypesEnsParentOf: [ProjectTypesEn!]!
+  projectTypesTrsParentOf: [ProjectTypesTr!]!
+}
+
+type SlaMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String
+  parentOfSlas: [Sla!]!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime!
+}
+
+type CheckItem {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  checkItemsParentOf: [CheckItemsMain!]!
+  includesOfCheckList: [CheckList!]!
+  className: String!
+  createdAt: DateTime!
+  description: String!
+  documentRequired: Boolean
+  isRequired: Boolean
+  inputType: String
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  photoRequired: Boolean
+  tag: [String]!
+  updatedAt: DateTime
+  CheckItemValue: [CheckItemValue!]!
+}
+
+type CheckItemValue {
+  key: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  description: String
+  isActive: Boolean
+  canDisplay: Boolean
+  isDeleted: Boolean
+  canDelete: Boolean
+  inputValue: JSON
+  inputValueParsed: JSON
+  id: Int
+  labels: [String]
+  name: String
+  tag: [String]
+  CheckListValue: [CheckListValue!]!
+  CheckItem: [CheckItem!]!
+  Image: [Image!]!
+  Document: [Document!]!
+}
+
+type WorkOrderRoot {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String!
+  parentOfClassifications: [Classification!]!
+  parentOfCronJobs: [CronJobMain!]!
+  parentOfDecisionModelNotations: [DecisionModelNotationMain!]!
+  parentOfFeatures: [FeatureMain!]!
+  parentOfProjectTypes: [ProjectTypeMain!]!
+  parentOfTaskTypes: [TaskTypeMain!]!
+  parentOfWorkFlows: [WorkFlowMain!]!
+  parentOfWorkSpaces: [WorkSpaceMain!]!
+  realm: String!
+  tag: [String]!
+  updatedAt: DateTime!
+}
+
+type Classification {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type CronJobMain {
+  id: Int
+  labels: [String]
+  canCopied: Boolean
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean
+  key: String
+  name: String!
+  owner: String
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type DecisionModelNotationMain {
+  id: Int
+  labels: [String]
+  canCopied: Boolean
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type MaintenanceMainNode {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  key: String!
+  realm: String!
+  name: String
+  rootsParentOf: [WorkOrderRoot!]!
+  MaintenanceMain: [MaintenanceMain!]!
+}
+
+type WorkFlowMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  parentOfWorkFlows: [WorkFlow!]!
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type WorkFlow {
+  id: Int
+  labels: [String]
+}
+
+type WorkSpaceMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  createdBy: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  parentOfWorkSpaces: [WorkSpace!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type TaskTypeMain {
+  id: Int
+  labels: [String]
+  name: String
+  canDelete: Boolean
+  realm: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  rootsParentOf: [WorkOrderRoot!]!
+  childs: [TaskTypeLang!]!
+}
+
+type FeatureMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type RegulationMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type CheckListMain {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  name: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  parentOfCheckList: [CheckList!]!
+  realm: String!
+}
+
+type CheckItemsMain {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  name: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  CheckItems: [CheckItem!]!
+  realm: String!
+}
+
+type SchedulesNodes {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+}
+
+type UserMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  parentOfUsers: [UserVirtualWorkSpace!]!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type LanguageMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+}
+
+type ProjectTypeMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  tag: [String]
+  updatedAt: DateTime
+  rootsParentOf: [WorkOrderRoot!]!
+  projectTypesEnsParentOf: [ProjectTypesEn!]!
+  projectTypesTrsParentOf: [ProjectTypesTr!]!
+}
+
+type ProjectTypesEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [ProjectTypeMain!]!
+  parentOfProjectTypes: [ProjectType!]!
+}
+
+type ProjectTypesTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [ProjectTypeMain!]!
+  parentOfProjectTypes: [ProjectType!]!
+}
+
+type ProjectType {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String
+  language: String!
+  name: String!
+  projectTypesEnsParentOf: [ProjectTypesEn!]!
+  projectTypesTrsParentOf: [ProjectTypesTr!]!
+}
+
+type SlaMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String
+  parentOfSlas: [Sla!]!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime!
+}
+
+type ChangeReason {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [ChangeReasonEn!]!
+  parentOfTr: [ChangeReasonTr!]!
+}
+
+type ChangeReasonEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ChangeReason!]!
+}
+
+type ChangeReasonTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ChangeReason!]!
+}
+
+type ChangeRisk {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [ChangeReasonEn!]!
+  parentOfTr: [ChangeReasonTr!]!
+}
+
+type ChangeRiskEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ChangeRisk!]!
+}
+
+type ChangeRiskTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ChangeRisk!]!
+}
+
+type ChangeType {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [ChangeTypeEn!]!
+  parentOfTr: [ChangeTypeTr!]!
+}
+
+type ChangeTypeEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ChangeType!]!
+}
+
+type ChangeTypeTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ChangeType!]!
+}
+
+type ChannelSource {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [ChannelSourceEn!]!
+  parentOfTr: [ChannelSourceTr!]!
+}
+
+type ChannelSourceEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ChannelSource!]!
+}
+
+type ChannelSourceTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ChannelSource!]!
+}
+
+type Hardware {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [HardwareEn!]!
+  parentOfTr: [HardwareTr!]!
+}
+
+type HardwareEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [Hardware!]!
+}
+
+type HardwareTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [Hardware!]!
+}
+
+type Impact {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [ImpactEn!]!
+  parentOfTr: [ImpactTr!]!
+}
+
+type ImpactEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [Impact!]!
+}
+
+type ImpactTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [Impact!]!
+}
+
+type InvestigationReason {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [InvestigationReasonEn!]!
+  parentOfTr: [InvestigationReasonTr!]!
+}
+
+type InvestigationReasonEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [InvestigationReason!]!
+}
+
+type InvestigationReasonTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [InvestigationReason!]!
+}
+
+type Priority {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [PriorityEn!]!
+  parentOfTr: [PriorityTr!]!
+}
+
+type PriorityEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [InvestigationReason!]!
+}
+
+type PriorityTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [InvestigationReason!]!
+}
+
+type RequestType {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [RequestTypeEn!]!
+  parentOfTr: [RequestTypeTr!]!
+}
+
+type RequestTypeEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [RequestType!]!
+}
+
+type RequestTypeTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [RequestType!]!
+}
+
+type RequestedSubjectType {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [RequestedSubjectTypeEn!]!
+  parentOfTr: [RequestedSubjectTypeTr!]!
+}
+
+type RequestedSubjectTypeEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [RequestedSubjectType!]!
+}
+
+type RequestedSubjectTypeTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [RequestedSubjectType!]!
+}
+
+type ServiceDeskTeam {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [ServiceDeskTeamEn!]!
+  parentOfTr: [ServiceDeskTeamTr!]!
+}
+
+type ServiceDeskTeamEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ServiceDeskTeam!]!
+}
+
+type ServiceDeskTeamTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [ServiceDeskTeam!]!
+}
+
+type Software {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [SoftwareEn!]!
+  parentOfTr: [SoftwareTr!]!
+}
+
+type SoftwareEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [Software!]!
+}
+
+type SoftwareTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [Software!]!
+}
+
+type TaskClass {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [TaskClassEn!]!
+  parentOfTr: [TaskClassTr!]!
+}
+
+type TaskClassEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [TaskClass!]!
+}
+
+type TaskClassTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [TaskClass!]!
+}
+
+type TaskExecutionType {
+  canDelete: Boolean!
+  id: Int
+  labels: [String]
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [TaskExecutionTypeEn!]!
+  parentOfTr: [TaskExecutionTypeTr!]!
+}
+
+type TaskExecutionTypeEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [TaskExecutionType!]!
+}
+
+type TaskExecutionTypeTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [TaskExecutionType!]!
+}
+
+type WoCategory {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [WoCategoryEn!]!
+  parentOfTr: [WoCategoryTr!]!
+}
+
+type WoCategoryEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [WoCategory!]!
+}
+
+type WoCategoryTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [WoCategory!]!
+}
+
+type WorkSpaceType {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String
+  language: String!
+  name: String!
+  workSpaceTypesEnsParentOf: [WorkSpaceTypesEn!]!
+  workSpaceTypesTrsParentOf: [WorkSpaceTypesTr!]!
+}
+
+type WorkSpaceTypesEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  parentOfWorkSpaceTypes: [WorkSpaceType!]!
+}
+
+type WorkSpaceTypesTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  parentOfWorkSpaceTypes: [WorkSpaceType!]!
+}
+
+type MaintenanceMain {
+  id: Int
+  labels: [String]
+  scopeType: String
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  description: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String
+  trId: String!
+  updatedAt: DateTime
+  startDate: DateTime
+  endDate: DateTime
+  Components: [ComponentsMain!]!
+  FacilityStructures: [FacilityStructuresMain!]!
+  Systems: [SystemsMain!]!
+  tags: [String]
+  prioritiy: [MaintenancePrioritiy!]!
+  MaintenanceType: [MaintenanceType!]!
+  WorkSpaceMaintenanceMains: [WorkSpaceMaintenanceMain!]!
+  Status: [MaintenanceMainStatus!]!
+  Tasks: [Maintenance!]!
+}
+
+type MaintenancePrioritiy {
+  id: Int
+  labels: [String!]!
+  isDeleted: Boolean
+  code: String
+  realm: String
+  name: String
+  language: String
+}
+
+type MaintenanceType {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  language: String
+  owner: String
+  key: String
+  name: String
+  code: String
+  trId: String
+  updatedAt: DateTime
+  isActive: Boolean
+  isDeleted: Boolean
+}
+
+type MaintenanceMainStatusMain {
+  id: Int
+  labels: [String]
+  name: String
+  realm: String
+  parentOfStatuses: [MaintenanceMainStatusMain!]!
+  Statuses: [MaintenanceMainStatus!]!
+}
+
+type MaintenanceMainStatus {
+  id: Int
+  labels: [String]
+  language: String
+  name: String
+  code: String
+  MaintenancePlan: [MaintenanceMain!]!
+}
+
+type WorkSpaceMaintenanceMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  maintenancePeriodUnit: String
+  maintenancePeriodValue: Float
+  name: String
+  owner: String
+  totalEstimatedTimeUnit: String
+  totalEstimatedTimeValue: Float
+  trId: String
+  workFlows: [WorkSpaceWorkFlow!]!
+  workSpaces: [WorkSpace!]!
+  updatedAt: DateTime
+  preveiws: [MaintenancePreview!]!
+  previewScheduler: [Schedule!]!
+  maintenanceMains: [MaintenanceMain!]!
+  createdbyUsers: [UserVirtualWorkSpace!]!
+}
+
+type MaintenancePreview {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  taskStartDate: DateTime
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String!
+  trId: String!
+  updatedAt: DateTime
+  WorkSpaceMaintenanceMain: [WorkSpaceMaintenanceMain!]!
+  TaskScheduler: [Schedule!]!
+}
+
+type Maintenance {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  description: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  owner: String
+  trId: String
+  updatedAt: DateTime
+  ScheduledBy: [Schedule!]!
+  preveiw: [MaintenancePreview!]!
+  MaintenancePlan: [MaintenanceMain!]!
+}
+
+type WorkOrderRoot {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String!
+  parentOfClassifications: [Classification!]!
+  parentOfCronJobs: [CronJobMain!]!
+  parentOfDecisionModelNotations: [DecisionModelNotationMain!]!
+  parentOfFeatures: [FeatureMain!]!
+  parentOfProjectTypes: [ProjectTypeMain!]!
+  parentOfTaskTypes: [TaskTypeMain!]!
+  parentOfWorkFlows: [WorkFlowMain!]!
+  parentOfWorkSpaces: [WorkSpaceMain!]!
+  realm: String!
+  tag: [String]!
+  updatedAt: DateTime!
+}
+
+type Classification {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type CronJobMain {
+  id: Int
+  labels: [String]
+  canCopied: Boolean
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean
+  key: String
+  name: String!
+  owner: String
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type DecisionModelNotationMain {
+  id: Int
+  labels: [String]
+  canCopied: Boolean
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type MaintenanceMainNode {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  key: String!
+  realm: String!
+  name: String
+  rootsParentOf: [WorkOrderRoot!]!
+  MaintenanceMain: [MaintenanceMain!]!
+}
+
+type WorkFlowMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  parentOfWorkFlows: [WorkFlow!]!
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type WorkFlow {
+  id: Int
+  labels: [String]
+}
+
+type WorkSpaceMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  createdBy: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  parentOfWorkSpaces: [WorkSpace!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type TaskTypeMain {
+  id: Int
+  labels: [String]
+  name: String
+  canDelete: Boolean
+  realm: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  rootsParentOf: [WorkOrderRoot!]!
+  childs: [TaskTypeLang!]!
+}
+
+type FeatureMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type RegulationMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type CheckListMain {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  name: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  parentOfCheckList: [CheckList!]!
+  realm: String!
+}
+
+type CheckItemsMain {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean!
+  name: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  CheckItems: [CheckItem!]!
+  realm: String!
+}
+
+type SchedulesNodes {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean
+  realm: String
+  rootsParentOf: [WorkOrderRoot!]!
+}
+
+type UserMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  parentOfUsers: [UserVirtualWorkSpace!]!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type LanguageMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+}
+
+type ProjectTypeMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  realm: String!
+  tag: [String]
+  updatedAt: DateTime
+  rootsParentOf: [WorkOrderRoot!]!
+  projectTypesEnsParentOf: [ProjectTypesEn!]!
+  projectTypesTrsParentOf: [ProjectTypesTr!]!
+}
+
+type ProjectTypesEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [ProjectTypeMain!]!
+  parentOfProjectTypes: [ProjectType!]!
+}
+
+type ProjectTypesTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [ProjectTypeMain!]!
+  parentOfProjectTypes: [ProjectType!]!
+}
+
+type ProjectType {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String
+  language: String!
+  name: String!
+  projectTypesEnsParentOf: [ProjectTypesEn!]!
+  projectTypesTrsParentOf: [ProjectTypesTr!]!
+}
+
+type SlaMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String
+  parentOfSlas: [Sla!]!
+  realm: String!
+  rootsParentOf: [WorkOrderRoot!]!
+  tag: [String]
+  updatedAt: DateTime!
+}
+
+type Schedule {
+  id: Int
+  isDeleted: Boolean!
+  targetId: Int!
+  trId: String
+  targetLabels: [String]
+  schedulerHandlerKey: String!
+  oneTimeOccurrenceDateTime: LocalDateTime
+  planStartDate: DateTime
+  labels: [String!]!
+  preview: [MaintenancePreview!]!
+  plan: [WorkSpaceMaintenanceMain!]!
+  supportPreview: [SupportPreview!]!
+  supportPlan: [WorkSpaceSupportMain!]!
+  parentSchedule: [Schedule!]!
+  subSchedule: [Schedule!]!
+}
+
+type Sla {
+  id: Int
+  labels: [String]
+  owner: String
+  key: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  canDisplay: Boolean!
+  canDelete: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  trId: String!
+  createdBy: [UserVirtualWorkSpace!]!
+  parentOfWorkFlow: [WorkSpaceWorkFlow!]!
+  subSla: [SubSla!]!
+  blockStates: [WorkSpaceWorkFlowState!]!
+  name: String!
+  description: String
+  tag: [String!]
+  canExtendTime: Boolean!
+  slaApprover: [UserGroupVirtualWorkSpace!]!
+  parentOfSla: [SlaMain!]!
+}
+
+type SubSla {
+  id: Int
+  labels: [String]
+  owner: String
+  key: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  canDisplay: Boolean!
+  canDelete: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  trId: String!
+  createdBy: [UserVirtualWorkSpace!]!
+  parentOfSla: [Sla!]!
+  calendarOfSubSla: [SlaCalendar!]!
+  name: String!
+  description: String
+  tag: [String!]
+  startState: [WorkSpaceWorkFlowState!]!
+  endState: [WorkSpaceWorkFlowState!]!
+  time: String!
+}
+
+type SlaCalendar {
+  id: Int
+  key: String
+  isActive: Boolean
+  isDeleted: Boolean
+  canDisplay: Boolean
+  canDelete: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  description: String
+  tag: [String!]
+  childOfSlaCalendarMain: [SlaCalendarMain!]!
+  parentOfDay: [Day!]!
+}
+
+type SlaCalendarMain {
+  id: Int
+  labels: [String]
+  owner: String
+  key: String
+  realm: String
+  isActive: Boolean
+  isDeleted: Boolean
+  canDisplay: Boolean
+  canDelete: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  trId: String
+  name: String
+  description: String
+  tag: [String!]
+  parentOfSlaCalendar: [SlaCalendar!]!
+}
+
+type WeekdayMain {
+  id: Int
+  canDelete: Boolean
+  isDeleted: Boolean
+  name: String
+  code: String
+  realm: String
+  canCopied: Boolean
+  isRoot: Boolean
+  isActive: Boolean
+  default: Boolean
+  parentOfWeekday_en: [WeekdayMain_en!]!
+}
+
+type WeekdayMain_en {
+  id: Int
+  canDelete: Boolean
+  isDeleted: Boolean
+  name: String
+  code: String
+  realm: String
+  canCopied: Boolean
+  isRoot: Boolean
+  isActive: Boolean
+  default: Boolean
+  childOfWeekdayMain: [WeekdayMain!]!
+  parentOfDay: [Day!]!
+}
+
+type Day {
+  id: Int
+  canCopied: Boolean
+  canDelete: Boolean
+  code: String
+  isActive: Boolean
+  isDeleted: Boolean
+  name: String
+  childOfWeekday: [WeekdayMain!]!
+  childOfSlaCalendar: [SlaCalendar!]!
+  parentOfWorkingHour: [WorkingHours!]!
+}
+
+type WorkingHours {
+  startTime: DateTime
+  endTime: DateTime
+  childOfDay: [Day!]!
+}
+
+type Support {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  description: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  owner: String
+  trId: String
+  updatedAt: String
+  createdbyUsers: [UserVirtualWorkSpace!]!
+  requestedbyUsers: [UserVirtualWorkSpace!]!
+  currentStateStates: [WorkSpaceWorkFlowState!]!
+  defaultStateStates: [WorkSpaceWorkFlowState!]!
+  wocategoryWoCategories: [WoCategory!]!
+  preveiw: [SupportPreview!]!
+  ScheduledBy: [Schedule!]!
+  SupportPlan: [SupportMain!]!
+  CheckListValue: [CheckListValue!]!
+}
+
+type SupportMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean
+  scopeType: String
+  canDisplay: Boolean
+  createdAt: DateTime
+  description: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String
+  trId: String!
+  startDate: DateTime
+  endDate: DateTime
+  tags: [String]
+  updatedAt: String!
+  WorkSpaceSupportMains: [WorkSpaceSupportMain!]!
+  Components: [ComponentsMain!]!
+  FacilityStructures: [FacilityStructuresMain!]!
+  Systems: [SystemsMain!]!
+  SupportType: [SupportType!]!
+  prioritiy: [MaintenancePrioritiy!]!
+  createdbyUsers: [UserVirtualWorkSpace!]!
+  Status: [SupportMainStatus!]!
+  Tasks: [Support!]!
+}
+
+type WorkSpaceSupportMain {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String
+  trId: String
+  updatedAt: String
+  workFlows: [WorkSpaceWorkFlow!]!
+  workSpaces: [WorkSpace!]!
+  preveiws: [SupportPreview!]!
+  previewScheduler: [Schedule!]!
+  supportMains: [SupportMain!]!
+  documents: [Document!]!
+  images: [Image!]!
+  createdbyUsers: [UserVirtualWorkSpace!]!
+}
+
+type SupportType {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  language: String
+  owner: String
+  key: String
+  name: String
+  code: String
+  trId: String
+  updatedAt: String
+  isActive: Boolean
+  isDeleted: Boolean
+}
+
+type SupportPriority {
+  id: Int
+  labels: [String!]!
+  isDeleted: Boolean
+  realm: String
+  name: String
+  language: String
+  supportPlan: [SupportMain!]!
+}
+
+type SupportMainStatus {
+  id: Int
+  labels: [String]
+  name: String
+  SupportPlan: [SupportMain!]!
+}
+
+type SupportFacilityStructures {
+  FacilityStructures: [FacilityStructure!]!
+}
+
+type MaintenanceComponents {
+  hasVirtualRelationComponents: [Component!]!
+}
+
+type SupportMainNode {
+  id: Int
+  labels: [String]
+  isDeleted: Boolean
+  realm: String
+  SupportMain: [SupportMain!]!
+}
+
+type SystemsMain {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  SupportPlan: [SupportMain!]!
+  willBeAppliedToSystem: [System!]!
+}
+
+type SupportMainStatusMain {
+  id: Int
+  realm: String
+  labels: [String]
+  name: String
+  parentOfStatuses: [SupportMainStatusMain!]!
+  Statuses: [SupportMainStatus!]!
+}
+
+type SupportPreview {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  taskStartDate: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String!
+  trId: String!
+  updatedAt: String!
+  WorkSpaceSupportMain: [WorkSpaceSupportMain!]!
+  TaskScheduler: [Schedule!]!
+}
+
+type SupportMainStatus {
+  id: Int
+  labels: [String]
+  language: String
+  name: String
+  code: String
+  SupportPlan: [SupportMain!]!
+}
+
+type ComponentsMain {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String
+  trId: String
+  updatedAt: DateTime
+  willBeAppliedToComponents: [Component!]!
+  SupportPlan: [SupportMain!]!
+}
+
+type FacilityStructuresMain {
+  id: Int
+  labels: [String!]!
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  name: String
+  owner: String
+  trId: String
+  updatedAt: DateTime
+  SupportPlan: [SupportMain!]!
+  willBeAppliedToFacilityStructures: [FacilityStructure!]!
+}
+
+type SupportWoCategory {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  code: String!
+  createdAt: DateTime!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  owner: String!
+  trId: String!
+  updatedAt: DateTime!
+  parentOfEn: [SupportWoCategoryEn!]!
+  parentOfTr: [SupportWoCategoryTr!]!
+}
+
+type SupportWoCategoryEn {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [SupportWoCategory!]!
+}
+
+type SupportWoCategoryTr {
+  id: Int
+  labels: [String]
+  canCopied: Boolean!
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isRoot: Boolean!
+  key: String!
+  language: String!
+  name: String!
+  realm: String!
+  mainRootsParentOf: [Classification!]!
+  rootsParentOf: [SupportWoCategory!]!
+}
+
+type MaintenancePrioritiy {
+  id: Int
+  labels: [String!]!
+  isDeleted: Boolean
+  realm: String
+  name: String
+  language: String
+  MaintenancePlan: [MaintenanceMain!]!
+  SupportPlan: [SupportMain!]!
+}
+
+type FaultTask {
+  id: Int
+  labels: [String!]
+  owner: String
+  key: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  canDisplay: Boolean!
+  canDelete: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdAtDate: String!
+  updatedAtDate: String!
+  trId: String!
+  parentWorkSpace: [WorkSpace!]!
+  appointmentDate: DateTime!
+  dueDate: DateTime!
+  name: String!
+  description: String
+  tag: [String]
+}
+
+type TaskTypeLang {
+  id: Int
+  labels: [String]
+  name: String
+  isActive: Boolean
+  isDeleted: Boolean
+  language: String
+  realm: String
+  childs: [TaskType!]!
+}
+
+type TaskType {
+  id: Int
+  labels: [String]
+  code: String
+  name: String
+  language: String
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdAtDate: String
+  isActive: Boolean
+  isDeleted: Boolean
+  key: String
+  owner: String
+  trId: String
+  type: String
+  updatedAt: DateTime
+  updatedAtDate: String
+  workFlowsWorkflowTaskType: [WorkSpaceWorkFlow!]!
+  childs: [TaskTypeProperty!]!
+}
+
+type TaskTypeProperty {
+  id: Int
+  labels: [String]
+  canDelete: Boolean
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdAtDate: String
+  foreignUrl: String
+  isActive: Boolean
+  isDeleted: Boolean
+  kafkaEvent: String
+  key: String
+  language: String
+  multiLabel: Boolean
+  name: String
+  owner: String
+  trId: String
+  type: String
+  uniqueRel: Boolean
+  updatedAt: DateTime
+  updatedAtDate: String
+  urlType: String
+  variableName: String
+  nodePropArray: [String]
+  relNodeLabel: String
+  relParentNodeLabel: String
+  relatedNode: [String]
+  parent: [TaskType!]!
+}
+
+type WorkSpaceWorkFlowMain {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean
+  createdAt: DateTime
+  createdBy: String
+  isActive: Boolean
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  owner: String
+  workSpacesParentOf: [WorkSpace!]!
+  parentOfWorkFlows: [WorkSpaceWorkFlow!]!
+  tag: [String]
+  updatedAt: DateTime
+}
+
+type WorkSpaceWorkFlow {
+  id: Int
+  labels: [String]
+  key: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  isActive: Boolean
+  canDisplay: Boolean
+  isDeleted: Boolean
+  canDelete: Boolean
+  className: String
+  default: Boolean
+  tag: [String]
+  name: String
+  code: String
+  description: String
+  parentOfCancelledStates: [WorkSpaceWorkFlowCancelledStates!]!
+  parentOfDeferredStates: [WorkSpaceWorkFlowDeferredStates!]!
+  parentOfDoneStates: [WorkSpaceWorkFlowDoneStates!]!
+  parentOfWorkingStates: [WorkSpaceWorkFlowWorkingStates!]!
+  workFlowsParentOf: [WorkSpaceWorkFlowMain!]!
+  taskType: [TaskType!]!
+}
+
+type WorkSpaceWorkFlowState {
+  id: Int
+  labels: [String]
+  isActive: Boolean!
+  isDeleted: Boolean!
+  canDelete: Boolean!
+  key: String
+  name: String!
+  isDefault: Boolean!
+  isFinalState: Boolean
+  willAllowedRejectStateStates: [WorkSpaceWorkFlowState!]!
+  statesWillAllowedRejectState: [WorkSpaceWorkFlowState!]!
+  nextStateStates: [WorkSpaceWorkFlowState!]!
+  statesNextState: [WorkSpaceWorkFlowState!]!
+  maintenanceCurrentState: [Maintenance!]!
+  maintenanceDefaultState: [Maintenance!]!
+  supportCurrentState: [Support!]!
+  supportDefaultState: [Support!]!
+  currentState: [FaultTask!]!
+  defaultState: [FaultTask!]!
+  willApproveByUserGroups: [UserGroupVirtualWorkSpace!]!
+  willAssignToUserGroups: [UserGroupVirtualWorkSpace!]!
+  doneStatesParentOf: [WorkSpaceWorkFlowDoneStates!]!
+  workingStatesParentOf: [WorkSpaceWorkFlowWorkingStates!]!
+  deferredStatesParentOf: [WorkSpaceWorkFlowDeferredStates!]!
+  cancelledStatesParentOf: [WorkSpaceWorkFlowCancelledStates!]!
+  statesTaskNextState: [WorkSpaceWorkFlowState!]!
+  taskNextStateStates: [WorkSpaceWorkFlowState!]!
+}
+
+type WorkSpaceWorkFlowDoneStates {
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  parentOfStates: [WorkSpaceWorkFlowState!]!
+  workFlowsParentOf: [WorkSpaceWorkFlow!]!
+}
+
+type WorkSpaceWorkFlowDeferredStates {
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  parentOfStates: [WorkSpaceWorkFlowState!]!
+  workFlowsParentOf: [WorkSpaceWorkFlow!]!
+}
+
+type WorkSpaceWorkFlowCancelledStates {
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  parentOfStates: [WorkSpaceWorkFlowState!]!
+  workFlowsParentOf: [WorkSpaceWorkFlow!]!
+}
+
+type WorkSpaceWorkFlowWorkingStates {
+  canDelete: Boolean!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  key: String
+  name: String!
+  parentOfStates: [WorkSpaceWorkFlowState!]!
+  workFlowsParentOf: [WorkSpaceWorkFlow!]!
+}
+
+type WorkSpace {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  classifiedByWorkSpaceType: [WorkSpaceType!]!
+  copiedFromProjectType: [ProjectType!]!
+  createdByUser: [UserVirtualWorkSpace!]!
+  hasMemberUsers: [UserVirtualWorkSpace!]!
+  isDefaultOfUsers: [UserVirtualWorkSpace!]!
+  usingWorkspaceAsUserGroupUserGroups: [UserGroupVirtualWorkSpace!]!
+  workflows: [WorkSpaceWorkFlowMain!]!
+  WorkSpaceMaintenanceMains: [WorkSpaceMaintenanceMain!]!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  owner: String!
+  tag: [String]!
+  updatedAt: DateTime!
+  isActive: Boolean!
+  isArchived: Boolean!
+  createdAt: DateTime!
+  parentOfWorkSpace: [WorkSpaceMain!]!
+}
+
+type UserVirtualWorkSpace {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  createdAt: DateTime!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  referenceId: String!
+  referenceLabel: [String]!
+  updatedAt: DateTime!
+  url: String!
+  urlType: String!
+  type: String!
+  userGroupsHasMember: [UserGroupVirtualWorkSpace!]!
+  workSpacesHasMember: [WorkSpace!]!
+  workSpacesIsDefaultOf: [WorkSpace!]!
+  statesAssignedto: [WorkSpaceWorkFlowState!]!
+  userOriginal: JSON
+  faultsCreatedby: [FaultTask!]!
+  faultsHasVirtualRelation: [FaultTask!]!
+  faultsRequestedby: [FaultTask!]!
+}
+
+type UserGroupVirtualWorkSpace {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  createdAt: DateTime!
+  isDeleted: Boolean!
+  key: String!
+  name: String!
+  referenceId: String!
+  referenceLabel: [String]!
+  updatedAt: DateTime!
+  url: String!
+  urlType: String!
+  statesWillApproveBy: [WorkSpaceWorkFlowState!]!
+  statesWillAssignTo: [WorkSpaceWorkFlowState!]!
+  hasMemberUsers: [UserVirtualWorkSpace!]!
+  workSpacesUsingWorkspaceAsUserGroup: [WorkSpace!]!
+}
+
+type Folder {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  description: String!
+  folderType: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isPublic: Boolean!
+  key: String!
+  name: String!
+  owner: String!
+  tag: [String]!
+  updatedAt: DateTime!
+  workSpaceParentOf: [WorkSpace!]!
+  projectParentOf: [Project!]!
+  folderParentOf: [Folder!]!
+}
+
+type Project {
+  id: Int
+  labels: [String]
+  canDelete: Boolean!
+  canDisplay: Boolean!
+  createdAt: DateTime!
+  description: String!
+  folderType: String!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  isPublic: Boolean!
+  key: String!
+  name: String!
+  owner: String!
+  tag: [String]!
+  updatedAt: DateTime!
+  startDate: DateTime!
+  dueDate: DateTime!
+  workSpaceParentOf: [WorkSpace!]!
+  projectParentOf: [Project!]!
+  folderParentOf: [Folder!]!
+}
