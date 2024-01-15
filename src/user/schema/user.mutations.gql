@@ -1,0 +1,5 @@
+scalar JSON
+
+type Mutation {
+    createUser(createUserInput: CreateUserInput!): User
+}
