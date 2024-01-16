@@ -1,6 +1,7 @@
+import { EnumList } from 'src/common/enum/enumList'
 export const UserModuleSchema = `#graphql
 
-type "User" @mutation(operations: []) { 
+type ${EnumList.USER} @mutation(operations: []) { 
   ######################################### default props and relations ###################################
 	id: Int @unique
     name:String
