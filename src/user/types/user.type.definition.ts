@@ -6,6 +6,7 @@ type ${EnumList.USER} @mutation(operations: []) {
 	id: Int @unique
     name:String
     email:String
+}
  `;
 
 
