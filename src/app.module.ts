@@ -8,6 +8,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { Neo4jModule } from 'sgnm-neo4j';
 import { UserModule } from './user/user.module';
+import { GraphqlModule } from './graphql/graphql.module';
+import { OgmModule } from './ogm/ogm.module';
 
 
 @Module({
@@ -38,6 +40,9 @@ import { UserModule } from './user/user.module';
       }),
     }),
     UserModule,
+    GraphqlModule,
+    OgmModule
+
   ],
   controllers: [AppController],
   providers: [AppService],
