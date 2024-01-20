@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
 // import { Neo4jConfig } from './neo4j/neo4j-config.interface';
@@ -44,8 +42,8 @@ import { OgmModule } from './ogm/ogm.module';
     OgmModule
 
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 
 
