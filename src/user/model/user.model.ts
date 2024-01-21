@@ -6,7 +6,7 @@ import { UserModel } from 'src/ogm/types/type-definition.ogm.GENERIC';
 import { EnumList } from 'src/common/enum/enumList';
 
 @Injectable()
-export class SlaModelClass extends BaseModel implements OnApplicationBootstrap {
+export class UserModelClass extends BaseModel implements OnApplicationBootstrap {
   protected readonly nodeLabels = [EnumList.USER]; //TYpe isimleri
   protected readonly modulePath = 'user';
 
@@ -20,7 +20,7 @@ export class SlaModelClass extends BaseModel implements OnApplicationBootstrap {
       throw e;
     }
   }
-  get slaModel() {
+  get UserModel() {
     return this.getModel<UserModel>(EnumList.USER);
   }
 }
