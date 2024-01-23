@@ -8,8 +8,8 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
 
-  @Mutation('createSla')
-  async createSla(
+  @Mutation('createUser')
+  async createUser(
       @Args('createUserInput') createUserInput: CreateUserInput,
       @Context() context
   ): Promise<any> {

@@ -12,12 +12,7 @@ import { EnumList } from 'src/common/enum/enumList'
     UserModelClass,
     OgmService,
     UserService,
-    {
-      provide: EnumList.USER,
-      useClass: UserRepository
-    
-    },
-
+    UserRepository
   ],
   exports: [UserService]
 })
