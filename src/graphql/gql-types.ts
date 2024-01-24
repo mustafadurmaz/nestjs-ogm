@@ -20,7 +20,7 @@ export interface User {
 }
 
 export interface IMutation {
-    createUser(createUserInput: CreateUserInput): User[] | Promise<User[]>;
+    createUser(createUserInput: CreateUserInput): User | Promise<User>;
 }
 
 export interface IQuery {

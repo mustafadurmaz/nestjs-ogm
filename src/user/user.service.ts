@@ -10,7 +10,7 @@ export class UserService {
   async createUser(createUserInput: CreateUserInput): Promise<any> {
     try {
       const user = await this.userRepository.UserModel.create({
-          input: [],
+          input: [createUserInput],
       });
 
       return user;
