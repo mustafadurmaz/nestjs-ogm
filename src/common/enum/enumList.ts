@@ -3,5 +3,6 @@
  */
 export enum EnumList {
     USER = 'User',
+    SUBUSER = 'SubUser',
   }
   
