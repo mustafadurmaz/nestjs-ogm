@@ -7,7 +7,7 @@ import { EnumList } from 'src/common/enum/enumList';
 
 @Injectable()
 export class UserModelClass extends BaseModel implements OnApplicationBootstrap {
-  protected readonly nodeLabels = [EnumList.USER]; //TYpe isimleri
+  protected readonly nodeLabels = [EnumList.USER, EnumList.SUBUSER]; //TYpe isimleri
   protected readonly modulePath = 'user';
 
   constructor(protected readonly ogmService: OgmService) {
@@ -23,4 +23,9 @@ export class UserModelClass extends BaseModel implements OnApplicationBootstrap 
   get UserModel() {
     return this.getModel<UserModel>(EnumList.USER);
   }
+
+  get subUserModel() {
+    return this.getModel<UserModel>(EnumList.SUBUSER);
+  }
+
 }

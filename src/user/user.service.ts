@@ -19,4 +19,20 @@ export class UserService {
       throw error;
     }
   }
+
+  //create sub user
+  async createSubUser(createUserInput: CreateUserInput): Promise<any> {
+    try {
+      const user = await this.userRepository.subUserModel.create({
+          input: [createUserInput],
+      });
+
+      return user;
+
+    } catch (error) {
+      
+
+
+    }
+  }
 }

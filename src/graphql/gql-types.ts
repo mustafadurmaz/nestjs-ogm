@@ -17,6 +17,14 @@ export interface User {
     id?: Nullable<number>;
     name?: Nullable<string>;
     email?: Nullable<string>;
+    subSla: SubUser[];
+}
+
+export interface SubUser {
+    id?: Nullable<number>;
+    name?: Nullable<string>;
+    email?: Nullable<string>;
+    parentOfUser: User[];
 }
 
 export interface IMutation {
