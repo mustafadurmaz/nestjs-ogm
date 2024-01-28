@@ -15,5 +15,9 @@ export class UserResolver {
   ): Promise<any> {
       return this.userService.createUser(createUserInput);
   }
+
+  //create sub user
+
   
+
 }

@@ -13,6 +13,12 @@ export interface CreateUserInput {
     email?: Nullable<string>;
 }
 
+export interface CreateSubUserInput {
+    name?: Nullable<string>;
+    email?: Nullable<string>;
+    parentOfUser?: Nullable<string>;
+}
+
 export interface User {
     id?: Nullable<number>;
     name?: Nullable<string>;
@@ -29,6 +35,7 @@ export interface SubUser {
 
 export interface IMutation {
     createUser(createUserInput: CreateUserInput): User | Promise<User>;
+    createSubUser(createSubUserInput: Nullable<CreateSubUserInput>[]): Nullable<Nullable<SubUser>[]> | Promise<Nullable<Nullable<SubUser>[]>>;
 }
 
 export interface IQuery {

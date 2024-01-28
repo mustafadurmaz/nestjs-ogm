@@ -2,3 +2,9 @@ input CreateUserInput{
     name: String
     email: String
 }
+
+input CreateSubUserInput{
+    name: String
+    email: String
+    parentOfUser: String
+}
