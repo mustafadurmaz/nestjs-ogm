@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { CreateSubUserInput, CreateUserInput } from 'src/graphql/gql-types';
 import { assignDtoPropToEntity } from 'sgnm-neo4j/dist';
+import { UserCreateInput } from 'src/ogm/types/type-definition.ogm.GENERIC';
 
 
 @Injectable()
@@ -41,13 +42,13 @@ export class UserService {
                   parentOfUser: {
                     connect: [
                       {
-                        where: { node: { id: +createSubUserInput.parentOfUser, isDeleted: false } }, edge: { isDeleted: false }
+                        where: { node: { id: +createSubUserInput.parentOfUser} }, edge: { isDeleted: false }
                       }
                     ]
                   }
 
                 }
-              ]
+              ] 
             }
           )
         } ))
