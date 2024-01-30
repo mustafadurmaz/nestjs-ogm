@@ -23,43 +23,21 @@ export const gqlProviderFactory = async (
   configService: ConfigService,
   cacheManager: Cache,
 ) => {
-  const getUserToken = async () => {
-    try {
-      let token;
-      token = await cacheManager.get('KC_TOKEN');
-      if (!token) {
-        const userUrl = await configService.get('USER_URL');
-        const username = await configService.get('WORKORDER_USER_NAME');
-        const password = await configService.get('WORKORDER_USER_PASS');
-        const loginResponse = await axios.post(
-          `${userUrl}/login`,
-          {
-            username,
-            password,
-          },
-          {},
-        );
-        token = loginResponse.data.token_type + ' ' + loginResponse.data.access_token;
-      }
-      return token;
-    } catch (e) {
-      throw e;
-    }
-  };
+  
 
   const vNodeHandler = async ({ urlType, url, ...restOfArgs }) => {
     try {
       if (urlType.toLowerCase() === 'post') {
         const req = await axios.post(url, restOfArgs?.payload ? restOfArgs.payload : {}, {
           headers: {
-            Authorization: await getUserToken(),
+            
           },
         });
         return req.data;
       } else {
         const req = await axios.get(url, {
           headers: {
-            Authorization: await getUserToken(),
+            
           },
         });
         return req.data;
@@ -76,14 +54,6 @@ export const gqlProviderFactory = async (
     typeDefs,
     driver,
     features: {
-      authorization: {
-        key: {
-          url: `${configService.get<string>('KEYCLOAK_URL')}/realms/${configService.get<string>(
-            'KEYCLOAK_REALM',
-          )}/protocol/openid-connect/certs`,
-          // issuer: `${configService.get<string>('KEYCLOAK_URL')}/realms/${configService.get<string>('KEYCLOAK_REALM')}`,
-        },
-      },
       filters: {
         String: {
           MATCHES: true,
