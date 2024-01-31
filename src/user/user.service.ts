@@ -39,13 +39,7 @@ export class UserService {
                 {
                   ...userFinalObject,
 
-                  parentOfUser: {
-                    connect: [
-                      {
-                        where: { node: { id: +createSubUserInput.parentOfUser} }, edge: { isDeleted: false }
-                      }
-                    ]
-                  }
+                  
 
                 }
               ] 
@@ -60,6 +54,7 @@ export class UserService {
       throw error;
     }
   }
+
 
 
 }
